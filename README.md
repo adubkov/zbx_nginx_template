@@ -2,7 +2,7 @@
 
 Zabbix template for Nginx (python)
 
-It's accumulate nginx stats and parse the access.log (just pice of log at oce) and push result in Zabbix throuhg trap-messages
+It's accumulate nginx stats and parse the access.log (just pice of log at oce) and push result in Zabbix through trap-messages
 
 ##System requirements
 
