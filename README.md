@@ -2,10 +2,12 @@
 
 Zabbix template for Nginx (python)
 
+It's accumulate nginx stats and pars diff of access.log and push result in Zabbix throuhg trap-messages
+
 ##System requirements
 
 - [python](http://www.python.org/downloads/)
-- nginx with configured http_stub_status_module
+- [nginx](http://nginx.org/) with configured http_stub_status_module and access.log
 
 ## What's logging:
 
