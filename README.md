@@ -12,8 +12,8 @@ It's accumulate nginx stats and parse the access.log (just pice of log at oce) a
 ## What's logging:
 
 - Request\sec
-- Keepalive connections
-- Active connections
+- Response codes (200,301,302,403,404,500,503)\min
+- Active\Keepalive connections
 - Header and body reading
 - Accepted, handled connections
 

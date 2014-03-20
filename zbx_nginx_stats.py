@@ -141,6 +141,7 @@ d = d.strftime('%d/%b/%Y:%H:%M')
 total_rps = 0
 rps = [0]*60
 tps = [0]*60
+res_code = {}
 
 nf = open(nginx_log_file_path, 'r')
 
@@ -156,6 +157,12 @@ while line:
         new_seek = nf.tell()
         total_rps += 1
         sec = int(re.match('(.*):(\d+):(\d+):(\d+)\s', line).group(4))
+        code = re.match(r'(.*)"\s(\d*)\s', line).group(2)
+        if code in res_code:
+            res_code[code] += 1
+        else:
+            res_code[code] = 1
+
         rps[sec] += 1
     line = nf.readline()
 
@@ -170,14 +177,20 @@ data = parse_nginx_stat(data)
 
 data_to_send = []
 
+# Adding the metrics to response
 if not metric:
     for i in data:
         data_to_send.append(Metric(hostname, ('nginx[%s]' % i), data[i]))
 else:
     print data[metric]
 
+# Adding the request per seconds to response
 for t in range(0,60):
     data_to_send.append(Metric(hostname, 'nginx[rps]', rps[t], minute+t))
+
+# Adding the response codes stats to respons
+for t in res_code:
+    data_to_send.append(Metric(hostname, ('nginx[%s]' % t), res_code[t]))
 
 
 send_to_zabbix(data_to_send, zabbix_host, zabbix_port)
