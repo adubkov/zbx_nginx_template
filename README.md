@@ -52,7 +52,7 @@ chmod +x zbx_nginx_stats.py
 ```
 $ sudo crontab -e
 
-*/1 * * * * /etc/zabbix/script/nginx/zbx_redis_module.py
+*/1 * * * * /etc/zabbix/script/nginx/zbx_redis_stats.py
 ```
 
 5) Import `zbx_nginx_template.xml` into zabbix in Tepmplate section web gui.
