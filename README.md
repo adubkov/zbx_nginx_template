@@ -19,14 +19,14 @@ It's accumulate nginx stats and parse the access.log (just pice of log at once) 
 
 ## Install
 
-1) Put `zbx_nginx_stats.py` into your scripts path (like: `/etc/zabbix/script/nginx/`).
+1) Put `zbx_nginx_stats.py` into your scripts path (like: `/etc/zabbix/script/nginx/`) on your Zabbix agent hosts.
 
 2) Change next section in zbx_nginx_stats.py, to your configuration:
 
 ```
 zabbix_host = '127.0.0.1'   # Zabbix server IP
 zabbix_port = 10051         # Zabbix server port
-hostname = 'Zabbix server'  # Name of monitored server, like it shows in zabbix web ui
+hostname = 'Zabbix Agent'   # Name of monitored host, like it shows in zabbix web ui
 time_delta = 1              # grep interval in minutes
 
 # URL to nginx stat (http_stub_status_module)
@@ -56,6 +56,16 @@ $ sudo crontab -e
 ```
 
 5) Import `zbx_nginx_template.xml` into zabbix in Tepmplate section web gui.
+
+6) Add the following configurations to you Nginx configuration file.
+```
+location /nginx_stat {
+  stub_status on;       # Turn on nginx stats
+  access_log   off;     # We do not need logs for stats
+  allow 127.0.0.1;      # Security: Only allow access from IP
+  deny all;             # Deny requests from the other of the world
+}
+```
 
 That is all :)
 
