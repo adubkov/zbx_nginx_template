@@ -156,7 +156,7 @@ while line:
     if d in line:
         new_seek = nf.tell()
         total_rps += 1
-        sec = int(re.match('(.*):(\d+):(\d+):(\d+)\s', line).group(4))
+        sec = int(re.match('(.*):(\d+):(\d+):(\d+)\s.*]', line).group(4))
         code = re.match(r'(.*)"\s(\d*)\s', line).group(2)
         if code in res_code:
             res_code[code] += 1
