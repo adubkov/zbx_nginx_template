@@ -63,10 +63,9 @@ location /nginx_stat {
   stub_status on;       # Turn on nginx stats
   access_log   off;     # We do not need logs for stats
   allow 127.0.0.1;      # Security: Only allow access from IP
+  allow ::1;            # Security IPv6: allow only from localhost
   deny all;             # Deny requests from the other of the world
 }
 ```
 
 That is all :)
-
-
